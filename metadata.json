@@ -1,0 +1,6 @@
+{
+  "name": "History Vaults, Timelines & Quizzes",
+  "description": "An immersive history archive featuring 1,500+ historical decrees, royal proclamations, and wartime speeches across China, India, Europe, Rome, Japan, Russia, Greece, Egypt, and the Americas with complete English translations, side-by-side bilingual study, speech synthesis, interactive timelines, and quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

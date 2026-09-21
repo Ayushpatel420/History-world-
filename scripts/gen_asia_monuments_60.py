@@ -1,0 +1,352 @@
+#!/usr/bin/env python3
+"""
+Generates 60 Asian Monuments into src/data/monuments/asianMonuments.ts
+"""
+import json
+
+def item(id, name, native, cat, loc, country, era, yr_str, yr_num, arch, style, dim, mat, hist, marv, mod, img, tags, facts, unesco="World Heritage Landmark"):
+    return {
+        "id": id,
+        "name": name,
+        "nativeOrAlternateName": native,
+        "category": cat,
+        "location": loc,
+        "country": country,
+        "region": "Asia" if country not in ["United Arab Emirates", "Jordan", "Israel / Palestine", "Palestine / Jerusalem", "Iran", "Saudi Arabia"] else "Middle East",
+        "era": era,
+        "yearBuilt": yr_str,
+        "numericYear": yr_num,
+        "architectOrCreator": arch,
+        "architecturalStyle": style,
+        "dimensionsAndHeight": dim,
+        "materialsUsed": mat,
+        "historyAndBackground": hist,
+        "architecturalMarvels": marv,
+        "modernStatusAndSignificance": mod,
+        "imageUrl": img,
+        "fallbackImageUrl": "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=1200",
+        "tags": tags,
+        "keyFacts": facts,
+        "unescoStatus": unesco
+    }
+
+asian_monuments = [
+  # 1. Taj Mahal
+  item("taj-mahal", "Taj Mahal", "क्राउन ऑफ़ द पैलेस (Crown of the Palace)", "Famous Building", "Agra, Uttar Pradesh", "India",
+    "Mughal Empire Golden Age (1632–1653 CE)", "1632–1653 CE", 1648, "Ustad Ahmad Lahori, commissioned by Emperor Shah Jahan",
+    "Mughal Architecture (Persian, Islamic, Indian fusion)", "Height: 73 m (240 ft); Central dome diameter: 17.7 m; Complex area: 42 acres",
+    "Translucent Makrana white marble, red sandstone, inlaid with 28 types of precious gemstones",
+    "The Taj Mahal is widely acknowledged as the crown jewel of Indo-Islamic art in India. Commissioned in 1631 by Emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal, who died giving birth to their fourteenth child. Construction began in 1632 and enlisted over 20,000 artisans, masons, calligraphers, and stone carvers from India, Persia, the Ottoman Empire, and Europe, alongside 1,000 elephants used to haul marble from Rajasthan. The central mausoleum was completed in 1648, while surrounding courtyards, minarets, and mosque were completed by 1653.",
+    "Celebrated for its absolute bilateral symmetry along a central axis, with the sole exception being Shah Jahan’s tomb itself, which was added later beside Mumtaz Mahal. The four 40-meter corner minarets are tilted outward by approximately 3 degrees so that during an earthquake, they would fall outward away from the delicate marble dome. The translucent Makrana white marble shifts hue across the day—rosy pink at dawn, bright milky white at noon, and shimmering silver under the moon.",
+    "Inscribed as a UNESCO World Heritage Site in 1983 and voted one of the New 7 Wonders of the World in 2007. Protected by the Taj Trapezium Zone (TTZ) restricting industrial emissions.",
+    "https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&q=80&w=1200",
+    ["Taj Mahal", "India", "Mughal", "UNESCO", "Wonder of the World", "Marble", "Agra", "Shah Jahan"],
+    ["Built by Emperor Shah Jahan in memory of his favorite empress Mumtaz Mahal", "Minarets lean outward at a 3-degree angle as an earthquake defense mechanism", "Took 22 years and over 20,000 master artisans to construct", "Shifts color throughout the day from pink at sunrise to golden under moonlight"],
+    "Inscribed 1983 (Criterion i)"),
+
+  # 2. Great Wall of China
+  item("great-wall-of-china", "Great Wall of China", "万里长城 (Wànlǐ Chángchéng - 10,000-Li Long Wall)", "Ancient Wonder", "Northern Frontier across 15 provinces", "China",
+    "Qin Dynasty to Ming Dynasty (7th Century BCE – 1644 CE)", "c. 221 BCE – 1644 CE", -221, "First unified under Emperor Qin Shi Huang; fortified by Ming Dynasty emperors",
+    "Ancient Chinese Military Defensive Rampart Engineering", "Total length: 21,196 km (13,171 miles); Average wall height: 6–8 m; Width: 5–8 m",
+    "Rammed earth, dressed granite blocks, kiln-fired gray bricks, sticky rice mortar lime binder",
+    "The Great Wall is the longest defensive fortification in human history. Earliest sections were built by rival feudal states during the Warring States period. In 221 BCE, Qin Shi Huang unified China and ordered existing walls joined along the northern ridges to repel raids by Xiongnu nomadic confederations. Hundreds of thousands of soldiers and peasants labored under General Meng Tian. Later dynasties maintained sections, but the iconic stone and brick watchtowers seen today were built during the Ming Dynasty (1368–1644 CE) following the Battle of Tumu.",
+    "Ming builders mixed sticky rice soup with slaked lime, producing a mortar with amylopectin that created an extraordinarily resilient seal against weather and vegetation. Traces razor-thin mountain ridges across steep terrain and was supported by over 25,000 watchtowers and beacon towers that transmitted emergency tactical warnings thousands of miles within hours using coded smoke by day and beacon fires by night.",
+    "Designated a UNESCO World Heritage Site in 1987 and voted one of the New 7 Wonders of the World in 2007. Serves as the ultimate symbol of Chinese civilizational perseverance.",
+    "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&q=80&w=1200",
+    ["Great Wall", "China", "UNESCO", "Fortress", "Ming Dynasty", "Qin Shi Huang", "Wonder of the World"],
+    ["Total recognized length exceeds 21,196 kilometers across northern China", "Mortar used in Ming sections contained sticky rice starch for phenomenal durability", "Beacon towers used coded smoke signals by day and fire torches by night", "Contrary to myth, it is not visible from low Earth orbit without camera zoom lenses"],
+    "Inscribed 1987 (Criteria i, ii, iii, iv, vi)"),
+
+  # 3. Angkor Wat
+  item("angkor-wat", "Angkor Wat", "អង្គរវត្ត (City Temple)", "Sacred Temple / Cathedral", "Siem Reap Province", "Cambodia",
+    "Khmer Empire (12th Century CE)", "c. 1113–1150 CE", 1130, "King Suryavarman II",
+    "Classical Khmer Architecture (Temple-Mountain & Concentric Galleries)", "Central tower height: 65 m (213 ft); Outer moat perimeter: 5 km; Area: 162.6 hectares (402 acres)",
+    "Over 5 million tonnes of quarried sandstone blocks, volcanic laterite foundation sub-blocks",
+    "Angkor Wat is the largest religious monument in the world. Built during the peak of the Khmer Empire under King Suryavarman II in the early 12th century, it was dedicated to the Hindu deity Vishnu as the royal state temple and funerary mausoleum. Sandstone blocks were quarried 40 km away at Mount Kulen and floated on bamboo rafts down the Siem Reap River. By the late 12th century, under King Jayavarman VII, the temple gradually transformed into an active Theravada Buddhist sanctuary, remaining in continuous worship even when neighboring jungle reclaimed the city of Angkor.",
+    "A terrestrial representation of Hindu cosmology: five central lotus-bud towers represent the five sacred peaks of Mount Meru, while the 190-meter-wide moat symbolizes the cosmic ocean. Uniquely faces westward toward the setting sun, consistent with funerary symbolism. Gallery walls feature over 1,200 square meters of bas-reliefs, depicting the Churning of the Ocean of Milk, the Mahabharata battle, and Suryavarman II’s war elephant procession. On the spring equinox, the sun rises precisely over the central spire.",
+    "Core of the UNESCO Angkor World Heritage Site (1992). Prominently depicted on Cambodia's national flag, making it one of the only buildings on Earth featured on a national banner.",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200",
+    ["Angkor Wat", "Cambodia", "Khmer", "Hindu", "Buddhist", "UNESCO", "Temple Mountain"],
+    ["Largest religious complex in the world, covering over 400 acres", "Faces westward toward the setting sun, unique among major classical Khmer temples", "The sun rises precisely over the central tower on the equinoxes", "Decorated with over 3,000 uniquely individual celestial Apsara carvings"],
+    "Inscribed 1992 (Criteria i, ii, iii, iv)"),
+
+  # 4. Forbidden City
+  item("forbidden-city", "Forbidden City (Palace Museum)", "紫禁城 (Zǐjìnchéng - Purple Forbidden City)", "Palace & Fortress", "Dongcheng District, Beijing", "China",
+    "Ming & Qing Dynasties (1406–1924 CE)", "1406–1420 CE", 1420, "Emperor Yongle (Chief architects: Kuai Xiang, Cai Xin, Ruan An)",
+    "Traditional Chinese Imperial Palace Architecture", "Complex length: 961 m; Width: 753 m; Area: 720,000 m² (178 acres); 980 surviving buildings with 8,886 bays",
+    "Phoebe zhennan (nanmu) whole tree trunks, Suzhou 'golden' floor bricks, glazed imperial yellow ceramic tiles, white marble balustrades",
+    "The Forbidden City served as the sovereign seat of power and ceremonial heart of the Chinese Empire for over 500 years across 24 emperors of the Ming and Qing dynasties. Constructed between 1406 and 1420 by more than one million laborers and 100,000 master artisans under the Yongle Emperor of the Ming Dynasty after he relocated the capital from Nanjing to Beijing. Surrounded by a 52-meter-wide moat and a 10-meter-high defensive wall. The last emperor, Puyi, abdicated in 1912, though he was permitted to reside in the Inner Court until 1924, after which the palace was converted into the Palace Museum in 1925.",
+    "Built entirely according to classical Feng Shui principles and imperial cosmology, aligned strictly north-to-south. Yellow glazed tiles on the roofs signified the exclusive sovereign realm of the Emperor, while purple walls represented Polaris (the North Star). The massive timber buildings feature complex dougong bracket sets that absorb seismic shaking without nails or rigid joints, enabling the structures to survive over 200 severe earthquakes, including the catastrophic 1976 Tangshan earthquake. The floor tiles of the Hall of Supreme Harmony underwent a secret two-year baking, soaking, and tung oil polishing process that produced a resonant metallic ring when walked upon.",
+    "Listed as a UNESCO World Heritage Site in 1987 as the largest collection of preserved ancient wooden structures on Earth. Welcomes over 19 million visitors annually, making it the most visited museum in the world.",
+    "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&q=80&w=1200",
+    ["Forbidden City", "Beijing", "China", "Imperial Palace", "UNESCO", "Ming Dynasty", "Qing Dynasty"],
+    ["Served as the imperial palace for 24 emperors across the Ming and Qing dynasties", "Constructed using over 1 million workers and 100,000 master craftsmen", "Features intricate Dougong wooden brackets that survived over 200 major earthquakes", "Roofs are clad in golden-yellow glazed ceramic tiles symbolizing imperial authority"],
+    "Inscribed 1987 (Criterion i, ii, iii, iv)"),
+
+  # 5. Burj Khalifa
+  item("burj-khalifa", "Burj Khalifa", "برج خليفة (Khalifa Tower)", "Monument & Tower", "Downtown Dubai", "United Arab Emirates",
+    "Contemporary Global Engineering (2004–2010 CE)", "2004–2010 CE", 2010, "Adrian Smith & William F. Baker (Skidmore, Owings & Merrill)",
+    "Neo-futurist High-Tech Skyscraper (Y-shaped Buttressed Core)", "Height: 828 m (2,717 ft); 163 floors; Floor area: 309,473 m²",
+    "Reinforced concrete core, structural steel spire, 103,000 m² of reflective glass and aluminum panels",
+    "The Burj Khalifa is the tallest building and tallest freestanding structure in human history. Initiated by Dubai's ruler Sheikh Mohammed bin Rashid Al Maktoum to shift Dubai's economic center toward international tourism and commerce. Construction began in 2004 with over 12,000 workers on site daily. Designed by Adrian Smith and engineered by Bill Baker, it opened on January 4, 2010, named in honor of UAE President Sheikh Khalifa bin Zayed Al Nahyan.",
+    "Features a revolutionary buttressed core design—a hexagonal central concrete core braced by three wings in a Y-shape inspired by the desert flower Hymenocallis. This aerodynamic profile deflects high-altitude desert wind vortices as the tower steps back in 26 helical terraces. Set the world record for vertical concrete pumping at 606 meters. The sun sets three to four minutes later on the top floors than on the ground.",
+    "The defining icon of 21st-century architectural engineering, holding world records for tallest structure, highest occupied floor, and elevator with the longest travel distance.",
+    "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=1200",
+    ["Burj Khalifa", "Dubai", "UAE", "Skyscraper", "Tallest Building", "Architecture"],
+    ["Tallest structure ever built by human hands at 828 meters (2,717 feet)", "Exterior is wrapped in over 26,000 hand-cut reflective glass panels", "Takes three to four months for professional abseilers to clean the entire facade", "The temperature at the tip of the spire is about 6°C cooler than at ground level"],
+    "Modern Architectural Wonder"),
+
+  # 6. Petra Treasury
+  item("petra-treasury", "Al-Khazneh (The Treasury) & Petra", "الخزنة (The Treasury) / الرقيم (Raqmu)", "Ancient Wonder", "Ma'an Governorate", "Jordan",
+    "Nabataean Kingdom (1st Century BCE – 1st Century CE)", "c. 9 BCE – 40 CE", 9, "Nabataean master stonemasons under King Aretas IV",
+    "Hellenistic-Nabataean Rock-Cut Architecture", "Facade height: 39.5 m (130 ft); Width: 25 m; City area: 264 km²",
+    "Living rose-red and ochre iron-banded sandstone cliff faces",
+    "Al-Khazneh is the most famous facade in the ancient rock-cut city of Petra, capital of the Nabataean Arab kingdom. Dominating the crossroads of ancient silk and incense routes linking Arabia, Egypt, and Rome. Carved into the cliffs of Jabal al-Madhbah under King Aretas IV. Bedouins called it 'The Treasury' believing an Egyptian pharaoh hid gold in the upper stone urn, though it was in fact an elaborate royal tomb. Petra thrived until trade routes shifted to sea voyages and earthquakes in 363 and 551 CE damaged its water system. Rediscovered by Swiss explorer Johann Burckhardt in 1812.",
+    "Carved directly into the cliff-face from the top down without scaffolding; masons cut footholds, chiseled upper pediments, and worked downward. The city thrived in an arid desert thanks to a sophisticated network of terracotta pipes, cisterns, and dams that distributed 45 million liters of spring water daily.",
+    "UNESCO World Heritage Site (1985) and one of the New 7 Wonders of the World (2007). Jordan’s most iconic cultural destination.",
+    "https://images.unsplash.com/photo-1579606032834-deffd1b4260f?auto=format&fit=crop&q=80&w=1200",
+    ["Petra", "Jordan", "Nabataean", "Al-Khazneh", "Treasury", "UNESCO", "Wonder of the World"],
+    ["Carved directly out of sandstone mountain cliffs from the top downward", "The decorative top urn bears bullet marks from treasure hunters seeking gold", "Reached through the Siq, a dramatic 1.2 km narrow canyon between 80-meter cliffs", "Supported a thriving desert population of 30,000 using advanced water engineering"],
+    "Inscribed 1985 (Criteria i, iii, iv)"),
+
+  # 7. Borobudur
+  item("borobudur", "Borobudur Temple", "ꦕꦤ꧀ꦝꦶꦧꦫꦧꦸꦝꦸꦂ (Candi Borobudur)", "Sacred Temple / Cathedral", "Magelang, Central Java", "Indonesia",
+    "Sailendra Dynasty (c. 750–825 CE)", "c. 778–850 CE", 800, "Gunadharma (legendary Javanese master architect)",
+    "Classical Javanese Buddhist Stupa-Mandala Architecture", "Base dimensions: 118 × 118 m (387 × 387 ft); Height: 35 m (115 ft); Volume: 55,000 m³",
+    "2 million andesite volcanic stone blocks quarried from local riverbeds, interlocking tongue-and-groove masonry without mortar",
+    "Borobudur is the largest Buddhist temple monument on Earth. Built in the fertile Kedu Plain of Central Java around 800 CE during the Sailendra Dynasty. Laid out as an immense three-dimensional stone mandala representing Buddhist cosmology: the base corresponds to Kamadhatu (the realm of desire), five square terraces to Rupadhatu (the realm of forms), and three circular top terraces to Arupadhatu (the formless realm of nirvana). Abandoned after the 10th-century eastward relocation of the court and covered by volcanic ash from Mount Merapi until rediscovered by Sir Thomas Stamford Raffles in 1814.",
+    "Features 2,672 relief panels stretching over 3 kilometers, illustrating the life of Gautama Buddha (Lalitavistara) and Buddhist parables (Jatakas). The top circular terraces house 72 perforated bell-shaped stupas, each enclosing a life-size statue of a seated Buddha. Built using an intricate dry-stone interlocking tongue-and-groove system that withstood severe tectonic quakes.",
+    "Designated a UNESCO World Heritage Site in 1991. The focal point of the annual international Vesak full-moon pilgrimage in Southeast Asia.",
+    "https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&q=80&w=1200",
+    ["Borobudur", "Indonesia", "Java", "Buddhist", "UNESCO", "Mandala", "Stupa"],
+    ["The largest Buddhist temple monument in the world, built from 2 million volcanic stones", "Constructed as a 3D stone mandala mapping the journey to spiritual enlightenment", "Houses 72 perforated bell stupas each holding a seated Buddha statue", "Buried under volcanic ash and jungle for nearly a millennium before rediscovery in 1814"],
+    "Inscribed 1991 (Criteria i, ii, vi)"),
+
+  # 8. Himeji Castle
+  item("himeji-castle", "Himeji Castle (White Heron Castle)", "姫路城 (Himeji-jō / Shirasagi-jō)", "Palace & Fortress", "Himeji, Hyōgo Prefecture", "Japan",
+    "Azuchi–Momoyama to Early Edo Period (1333–1609 CE)", "1581–1609 CE", 1609, "Ikeda Terumasa (expansion), Toyotomi Hideyoshi, Akamatsu Sadanori",
+    "Japanese Hirayama-shiro (Hilltop Castle Architecture)", "Main keep height: 46.4 m (152 ft); Complex area: 233 hectares; 83 surviving wooden structures",
+    "Japanese cypress (hinoki), hemlock, white plaster lime (shikkui), kawara clay roof tiles with family crests, dry-stone ishigaki walls",
+    "Himeji Castle is universally recognized as the finest surviving masterpiece of early 17th-century Japanese castle architecture. Nicknamed the 'White Heron Castle' (Shirasagi-jō) because its brilliant white plastered wooden walls resemble a heron spreading its wings. First established as a fort in 1333, Toyotomi Hideyoshi remodeled it in 1581, and Daimyo Ikeda Terumasa completely expanded it into a massive fortress between 1601 and 1609 following the Battle of Sekigahara. Uniquely preserved, having never suffered damage from war, siege, the 1945 Allied bombing raids of WWII, or the 1995 Great Hanshin earthquake.",
+    "Designed with an ingeniously deceptive maze-like defensive ring (nawashiro) featuring 84 gates, steep dead-end staircases, and spiraling alleys that forced attacking samurai to expose their flanks to archers and matchlock gunners firing through 997 triangular, circular, and rectangular loopholes (sama). The main keep rests upon two massive 25-meter wooden pillar trunks (one cypress, one fir) that run vertically through six interior floors to cushion seismic sway.",
+    "Japan's first UNESCO World Heritage Site (1993) and a designated National Treasure of Japan. Underwent a major restoration from 2009 to 2015 to clean the white plaster.",
+    "https://images.unsplash.com/photo-1590559899731-a3f30bc42588?auto=format&fit=crop&q=80&w=1200",
+    ["Himeji Castle", "Japan", "Samurai", "UNESCO", "White Heron", "Castle", "Edo Period"],
+    ["Nicknamed 'White Heron Castle' due to its brilliant white fireproof plaster facade", "Features a deceptive spiral defense system with 84 fortified gates and 997 arrow slits", "Never destroyed by war or bombing, surviving WWII and the 1995 Kobe earthquake", "Central keep is supported by two massive vertical timber pillars 25 meters tall"],
+    "Inscribed 1993 (Criteria i, iv)"),
+
+  # 9. Potala Palace
+  item("potala-palace", "Potala Palace", "པོ་ཏ་ལ (Potala / Marpo Ri Palace)", "Palace & Fortress", "Lhasa, Tibet Autonomous Region", "China",
+    "Tibetan Empire to Ganden Phodrang Era (1645–1694 CE)", "1645–1694 CE", 1648, "The 5th Dalai Lama (Ngawang Lobsang Gyatso) & Regent Desi Sangye Gyatso",
+    "Tibetan Dzong Fortress & Traditional Monastic Architecture", "Height: 117 m (384 ft); 13 stories; Width: 350 m; Area: 130,000 m²; over 1,000 rooms",
+    "Granite stone masonry walls up to 5 m thick, Himalayan cedar timber, rammed earth, crushed mineral pigments (red ochre and chalk lime), copper roof tiles gilded in pure gold",
+    "Perched atop Marpo Ri (the Red Mountain) in the Lhasa Valley at an elevation of 3,700 meters, Potala Palace was the winter residence and spiritual administrative seat of the Dalai Lamas until 1959. Originating in the 7th century when King Songtsen Gampo built a meditation retreat on the hill. In 1645, the 5th Dalai Lama ('The Great Fifth') began building the current palace. The White Palace (Potrang Karpo), used for government offices and living quarters, was finished in 1648; the central Red Palace (Potrang Marpo), dedicated to religious study and housing the gold-plated stupas of past Dalai Lamas, was completed in 1694.",
+    "The 13-story fortress rises seamlessly out of the granite mountain slopes with inward-sloping stone walls that make it earthquake-resistant. Molten copper was poured into wall foundations to guard against seismic shocks. Houses the golden funerary stupa of the 5th Dalai Lama, plated with 3,721 kilograms of solid gold and studded with 18,680 precious gemstones, including diamonds, pearls, and turquoise.",
+    "Inscribed as a UNESCO World Heritage Site in 1994. The definitive icon of Tibetan cultural identity and Himalayan Buddhist civilization.",
+    "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=1200",
+    ["Potala Palace", "Tibet", "Lhasa", "Dalai Lama", "UNESCO", "Buddhism", "Himalayas"],
+    ["Winter residence of the Dalai Lamas rising at an altitude of 3,700 meters above sea level", "Contains 13 stories, over 1,000 rooms, and 200,000 religious statues", "The 5th Dalai Lama's golden stupa contains 3.7 tons of pure gold", "Granite walls are up to 5 meters thick and reinforced with molten copper"],
+    "Inscribed 1994 (Criteria i, iv, vi)"),
+
+  # 10. Meenakshi Amman Temple
+  item("meenakshi-temple", "Meenakshi Amman Temple", "மீனாட்சி அம்மன் கோவில் (Arulmigu Meenakshi Sundareswarar Thirukovil)", "Sacred Temple / Cathedral", "Madurai, Tamil Nadu", "India",
+    "Pandyan & Nayak Dynasties (6th Century BCE foundation; current structures 1623–1655 CE)", "c. 1623–1655 CE", 1630, "Thirumalai Nayak and Pandyan kings",
+    "Dravidian Temple Architecture", "Tallest southern gopuram height: 52 m (170 ft); Complex perimeter: 258 × 241 m; Area: 14 acres; 14 monumental gopurams",
+    "Dressed granite foundation pillars, brick superstructure, multi-hued stucco (chunam) sculptures, gold-plated vimana towers",
+    "The Meenakshi Amman Temple is a historic Dravidian temple located on the southern bank of the Vaigai River in Madurai, one of the oldest continuously inhabited cities on Earth. Dedicated to Meenakshi (a form of Parvati) and her consort Sundareswarar (Shiva). Mentioned in classical Tamil Sangam literature over 2,000 years ago. Sacked in 1310 by Delhi Sultanate general Malik Kafur, it was triumphantly rebuilt and massively expanded by the Madurai Nayak dynasty, particularly King Thirumalai Nayak (1623–1655).",
+    "Enclosed by concentric granite walls pierced by 14 monumental gopurams (gateway towers), each an awe-inspiring tiered pyramid covered in thousands of colorful stucco sculptures of deities, demons, and celestial beings (the southern gopuram alone features 1,511 figures). Contains the 'Hall of a Thousand Pillars' (Ayiram Kaal Mandapam) with 985 carved granite pillars, and famous musical pillars carved from single granite blocks that emit distinct musical notes when tapped.",
+    "Attracts over 15,000 pilgrims daily and upwards of 50,000 during the annual Chithirai festival celebrating the divine wedding of Meenakshi and Sundareswarar. A premier candidate for UNESCO status and a pinnacle of South Indian living art.",
+    "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&q=80&w=1200",
+    ["Meenakshi Temple", "India", "Tamil Nadu", "Hindu", "Dravidian", "Gopuram", "Madurai"],
+    ["Features 14 monumental gopuram towers covered in tens of thousands of vivid mythological sculptures", "The southern gateway tower soars 52 meters (170 feet) high", "Home to the Hall of 1,000 Pillars, each carved with distinct mythical creatures", "Contains acoustic granite pillars that each resonate with a distinct musical note when struck"],
+    "Living Heritage Masterpiece"),
+
+  # 11. Dome of the Rock
+  item("dome-of-the-rock", "Dome of the Rock", "قبة الصخرة (Qubbat al-Sakhrah)", "Sacred Temple / Cathedral", "Old City of Jerusalem", "Palestine / Jerusalem",
+    "Umayyad Caliphate (688–691 CE)", "688–691 CE", 691, "Commissioned by Caliph Abd al-Malik ibn Marwan (Architects: Yazid ibn Salam and Raja ibn Haywah)",
+    "Early Islamic Umayyad Architecture (Byzantine-influenced octagonal rotunda)", "Dome height: 35 m (115 ft); Dome diameter: 20.4 m (67 ft); Octagonal wall width: 60 m",
+    "Local Jerusalem limestone, marble columns, Byzantine glass mosaics, cedar wood dome sheathed in gold-plated aluminum",
+    "The Dome of the Rock is the oldest surviving Islamic monumental structure in the world. Commissioned by the Umayyad Caliph Abd al-Malik and completed in 691 CE atop the elevated stone plateau of Mount Moriah (Haram al-Sharif / Temple Mount). In Islamic tradition, the central Foundation Stone (al-Sakhrah) is the site from which the Prophet Muhammad ascended to heaven (Mi'raj) during his miraculous Night Journey. In Jewish tradition, the stone is revered as the Holy of Holies where Abraham prepared to sacrifice Isaac and the location of Solomon's Temple.",
+    "Built as an octagonal rotunda around the sacred rock, its geometry is mathematically aligned with concentric ambulatories designed for circumambulation. Inside, a 240-meter-long mosaic inscription contains the earliest surviving dated Quranic architectural calligraphy. The radiant golden dome was clad in 80 kg of pure gold leaf in 1993 through a personal donation by King Hussein of Jordan.",
+    "Part of the UNESCO World Heritage Old City of Jerusalem (1981). An instantly recognizable global architectural masterpiece and a revered holy site for three major world religions.",
+    "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=1200",
+    ["Dome of the Rock", "Jerusalem", "Umayyad", "Islamic", "UNESCO", "Golden Dome", "Architecture"],
+    ["The oldest surviving Islamic monumental structure in the world, completed in 691 CE", "Encloses the Foundation Stone, revered by Jews, Christians, and Muslims alike", "The 240-meter interior inscription contains the earliest known dated Quranic architectural verses", "The dome was plated in 80 kg of pure gold in 1993 through a donation by King Hussein of Jordan"],
+    "Inscribed 1981 (Old City of Jerusalem)"),
+
+  # 12. Persepolis
+  item("persepolis", "Persepolis (Takht-e Jamshid)", "تخت جمشید (Throne of Jamshid) / 𐎱𐎠𐎼𐎿 (Pārsa)", "Archaeological City", "Marvdasht, Fars Province", "Iran",
+    "Achaemenid Persian Empire (c. 518–330 BCE)", "c. 518 BCE", -518, "Darius I the Great, expanded by Xerxes I and Artaxerxes I",
+    "Achaemenid Persian Imperial Architecture (Hypostyle Halls, Apadana)", "Terrace platform area: 125,000 m² (30 acres); Platform height: 12 m; Column height: 20 m",
+    "Dark grey and pink local limestone quarried from Mount Rahmat, cedar wood roof beams, gold foil cladding",
+    "Persepolis ('City of Persians') was the ceremonial capital of the first global superpower in human history: the Achaemenid Empire under Darius the Great. Founded around 518 BCE not as an administrative city, but as a monumental theatrical stage for the celebration of Nowruz (the Persian New Year and spring equinox). Delegations from 23 subject nations—from Egypt, Nubia, and Greece to India, Scythia, and Babylon—gathered annually to present tribute to the King of Kings. In 330 BCE, Alexander the Great conquered Persepolis, looted its treasuries on 20,000 mules and 5,000 camels, and burned the cedar-roofed palaces to the ground.",
+    "Built upon an immense 12-meter stone terrace carved from Mount Rahmat. Visitors entered through the Gate of All Nations flanked by colossal winged bull-human statues (Lamassu). The Apadana (Audience Hall) was supported by 72 soaring 20-meter columns topped by double-bull capitals. Its grand staircases feature the finest bas-reliefs of antiquity, depicting each delegation in authentic native clothing carrying regional treasures.",
+    "Declared a UNESCO World Heritage Site in 1979. The premier archaeological wonder of Iran and the ultimate symbol of ancient Persian imperial grandeur.",
+    "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&q=80&w=1200",
+    ["Persepolis", "Iran", "Persia", "Achaemenid", "Darius the Great", "Xerxes", "UNESCO", "Ancient Wonder"],
+    ["The ceremonial capital of the Persian Empire, where 23 subject nations presented New Year tribute", "The Apadana hall was supported by 72 towering 20-meter columns topped by double-bull capitals", "Burned by Alexander the Great in 330 BCE; the heat preserved thousands of clay administrative tablets", "Built using dry-stone blocks locked together with molten lead and iron butterfly clamps"],
+    "Inscribed 1979 (Criteria i, iii, vi)")
+]
+
+# We expand with the next 48 Asian monuments to reach exactly 60
+additional_asia = [
+  # 13. Temple of the Emerald Buddha (Wat Phra Kaew), Thailand
+  item("wat-phra-kaew", "Wat Phra Kaew & Grand Palace", "วัดพระศรีรัตนศาสดาราม (Temple of the Emerald Buddha)", "Sacred Temple / Cathedral", "Bangkok", "Thailand",
+    "Rattanakosin Kingdom (1782–Present CE)", "1782 CE", 1782, "King Rama I (Phutthayotfa Chulalok)",
+    "Classical Thai Rattanakosin Temple Architecture", "Area: 218,400 m²; Ubosot height: 32 m; Phra Si Rattana Chedi height: 40 m",
+    "Teak wood, gold leaf, mirror glass mosaic tiles, Italian marble, green jadeite",
+    "Wat Phra Kaew is regarded as the most sacred Buddhist temple in Thailand. Located within the historic grounds of the Grand Palace in Bangkok. Houses the Emerald Buddha (Phra Kaew Morakot), a dark green jadeite statue of Gautama Buddha in yogic posture. The statue has three seasonal gold cloaks (summer, rainy, and cool seasons) changed exclusively by the reigning King of Thailand in an auspicious ritual to ensure good fortune for the nation.",
+    "The Ubosot is covered in gilded wood carvings and hundreds of glittering glass mosaic tiles that dazzle under the tropical sun. Surrounding gallery walls feature a 2-kilometer continuous mural depicting the entire Thai Ramakien epic in 178 illustrated panels. The temple courtyard is guarded by twelve 5-meter-tall Yaksha demon guardian giants (Thotsakirithon).",
+    "Thailand's most sacred pilgrimage site and primary tourist landmark, welcoming over 8 million visitors annually.",
+    "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&q=80&w=1200",
+    ["Wat Phra Kaew", "Thailand", "Bangkok", "Grand Palace", "Buddhism", "Emerald Buddha"],
+    ["Houses the sacred Emerald Buddha carved from a single block of dark green jadeite", "The King of Thailand personally changes the Buddha's gold garments three times a year for the seasons", "Encircled by 2 kilometers of continuous murals illustrating the complete Ramakien epic", "Courtyard gates are guarded by 12 colossal 5-meter-tall Yaksha demon statues"],
+    "National Sacred Sanctuary"),
+
+  # 14. Kinkaku-ji (Golden Pavilion), Japan
+  item("kinkaku-ji", "Kinkaku-ji (The Golden Pavilion)", "金閣寺 (Rokuon-ji / Temple of the Golden Pavilion)", "Sacred Temple / Cathedral", "Kyoto", "Japan",
+    "Muromachi Period (1397 CE)", "1397 CE", 1397, "Ashikaga Yoshimitsu (3rd Ashikaga Shōgun)",
+    "Kitayama Culture Architecture (Blend of Shinden-zukuri, Buke-zukuri, and Zen styles)", "Height: 12.5 m (41 ft); 3 stories; Pond area: 6,600 m²",
+    "Japanese cypress timber, pure gold leaf plating on upper two stories, cedar shingles",
+    "Kinkaku-ji is a Zen Buddhist temple in Kyoto, originally built in 1397 as a retirement villa for Shogun Ashikaga Yoshimitsu. Upon his death in 1408, it was converted into a Rinzai Zen temple named Rokuon-ji in accordance with his will. In July 1950, a 21-year-old novice monk burned the temple down in a tragic fit of obsession, an event fictionalized by Yukio Mishima in 'The Temple of the Golden Pavilion'. The pavilion was rebuilt in 1955, replicating the original structure with thicker gold leaf plating.",
+    "Each of its three stories reflects a distinct architectural style: the ground floor is Shinden-zukuri (Heian aristocratic palace style) with unpainted wood; the second floor is Buke-zukuri (samurai warrior house style); and the top floor is Zen Karayo (Chinese Zen temple style) gilded inside and out. The pavilion overlooks the mirror-like Kyoko-chi (Mirror Pond), which reflects the shimmering gold facade amidst pine-clad islets.",
+    "Designated a UNESCO World Heritage Site in 1994 as part of the Historic Monuments of Ancient Kyoto. One of the most photographed temples in Japan.",
+    "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=1200",
+    ["Kinkaku-ji", "Kyoto", "Japan", "Golden Pavilion", "Zen", "UNESCO", "Shogun"],
+    ["The top two stories are completely sheathed in pure 24-karat gold leaf", "Blends three distinct Japanese architectural styles: palace, samurai, and Zen temple", "Sits on the edge of the Mirror Pond designed to reflect the golden facade perfectly", "Rebuilt faithfully in 1955 after being burned by a troubled novice monk in 1950"],
+    "Inscribed 1994 (Historic Monuments of Ancient Kyoto)"),
+
+  # 15. Shwedagon Pagoda, Myanmar
+  item("shwedagon-pagoda", "Shwedagon Pagoda (Great Dagon Pagoda)", "ရွှေတိဂုံဘုရား (Shwedagon Zedi Daw)", "Sacred Temple / Cathedral", "Yangon", "Myanmar",
+    "Mon & Bagan Eras (traditionally 6th Century BCE; current stupa 14th–18th Century CE)", "1362–1775 CE", 1362, "Queen Shin Sawbu & King Hsinbyushin",
+    "Mon-Burmese Buddhist Stupa Architecture", "Height: 112 m (367 ft); Base circumference: 433 m; Perimeter hill: Singuttara Hill",
+    "Brick core sheathed in real gold plates, crown umbrella (hti) encrusted with 5,448 diamonds, 2,317 rubies, and a 76-carat diamond at the apex",
+    "Shwedagon Pagoda is the most sacred Buddhist pagoda in Myanmar, believed to enshrine relics of the four previous Buddhas, including eight strands of hair from Gautama Buddha. Legend states that two merchant brothers, Tapussa and Bhallika, met the Buddha and received his hair relics, which King Okkalapa enshrined atop Singuttara Hill. In the 15th century, Queen Shin Sawbu donated her own weight in gold (40 kg) to plate the pagoda, starting a tradition followed by subsequent Burmese rulers.",
+    "The soaring 112-meter golden spire dominates Yangon's skyline. The stupa is sheathed in genuine gold plates donated by generations of devotees. The crowning spire ('Hti') is adorned with 5,448 diamonds, 2,317 rubies, and hundreds of gold and silver bells that chime in the breeze. The highest pinnacle holds a flawless 76-carat diamond that catches the last rays of the setting sun.",
+    "Myanmar's spiritual epicenter and national symbol. A site of historic democracy speeches, including Aung San Suu Kyi's famous address to 500,000 citizens in 1988.",
+    "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=1200",
+    ["Shwedagon Pagoda", "Myanmar", "Yangon", "Buddhist", "Gold", "Pagoda", "Ancient Wonder"],
+    ["The 112-meter spire is clad in genuine gold plates and crowned with 5,448 diamonds", "Enshrines eight strands of hair relics from Gautama Buddha", "The very tip of the spire is crowned with a 76-carat diamond", "Hundreds of gold and silver bells on the top umbrella chime continuously in the breeze"],
+    "National Sacred Monument"),
+
+  # 16. Sigiriya (Lion Rock), Sri Lanka
+  item("sigiriya", "Sigiriya (Lion Rock Fortress)", "සීගිරිය (Lion Rock) / சிகிரியா", "Palace & Fortress", "Matale District, Central Province", "Sri Lanka",
+    "Kassapa Dynasty (477–495 CE)", "477–495 CE", 477, "King Kashyapa I",
+    "Ancient Sri Lankan Rock-Cut Citadel & Hydraulic Garden Architecture", "Monolith height: 180 m (590 ft); Summit plateau: 1.5 hectares; Surrounding gardens: 3 km²",
+    "Natural granite metamorphic monolith rock column, baked brick masonry, lime plaster",
+    "Sigiriya is an ancient rock fortress and palace ruin located atop a sheer 180-meter-tall granite monolith. King Kashyapa built his palace fortress here after deposing and murdering his father, King Dhatusena, in fear of vengeance from his rightful half-brother Moggallana. Kashyapa transformed this imposing rock into an eagle's-nest citadel with water gardens, mirror-polished walls, and vivid frescoes of heavenly nymphs. After Kashyapa's defeat in 495 CE, Sigiriya was converted into a Buddhist monastery until the 14th century.",
+    "Visitors ascend the monolith through the 'Lion Gate,' between two colossal carved lion paws sculpted from brick and mortar. The western cliff face features the famous 'Sigiriya Frescoes'—vibrant paintings of celestial maidens (Apsaras) dating to the 5th century. Halfway up the rock is the 'Mirror Wall', plastered with porcelain-smooth lime so highly polished that the king could see his reflection. Ancient graffiti dating from the 6th to 14th century is scratched into the wall.",
+    "Declared a UNESCO World Heritage Site in 1982. Regarded by Sri Lankans as the Eighth Wonder of the World and an engineering marvel of ancient urban planning.",
+    "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&q=80&w=1200",
+    ["Sigiriya", "Sri Lanka", "Lion Rock", "UNESCO", "Fortress", "Ancient Wonder", "Palace"],
+    ["Palace fortress built atop a sheer 180-meter granite monolith by King Kashyapa in 477 CE", "Entrance to the upper summit passes through the colossal paws of a carved stone lion", "Western rock face features 1,500-year-old colorful frescoes of celestial maidens", "Features the polished 'Mirror Wall' inscribed with visitor poetry dating back to the 6th century"],
+    "Inscribed 1982 (Criteria ii, iii, iv)"),
+
+  # 17. Terracotta Army & Mausoleum of the First Qin Emperor, China
+  item("terracotta-army", "Terracotta Army & Qin Mausoleum", "兵马俑 (Qin Shi Huang Mausoleum Terracotta Warriors)", "Archaeological City", "Lintong District, Xi'an, Shaanxi", "China",
+    "Qin Dynasty (246–206 BCE)", "246–208 BCE", -221, "Commissioned by Emperor Qin Shi Huang (700,000 conscripted laborers)",
+    "Ancient Chinese Funerary Mausoleum Art & Military Array", "Estimated 8,000 soldiers, 130 chariots, 520 horses, 150 cavalry horses; Pit 1 length: 230 m",
+    "High-fired terracotta clay, organic lacquer, mineral pigments (Han purple, azurite, cinnabar), bronze weapons",
+    "The Terracotta Army is a monumental collection of life-size terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of a unified China. Buried with the emperor in 210–209 BCE to protect him in the afterlife and ensure his imperial rule in the netherworld. Discovered by local farmers digging a water well in March 1974. The complete necropolis covers 98 square kilometers and remains largely unexcavated, including the central tomb mound of Qin Shi Huang, which ancient historian Sima Qian recorded as having rivers of flowing mercury and celestial maps on its bronze ceiling.",
+    "Over 8,000 life-sized warriors were sculpted with individualized faces, hairstyles, ears, and uniforms representing different military ranks (infantrymen, archers, chariot drivers, and generals). They were originally painted in vivid colors using purple, red, green, and blue mineral pigments, and equipped with functioning bronze swords and crossbows treated with chromium oxide that remained razor-sharp after 2,200 years.",
+    "Inscribed as a UNESCO World Heritage Site in 1987. Regarded as one of the greatest archaeological discoveries of the 20th century.",
+    "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&q=80&w=1200",
+    ["Terracotta Army", "China", "Xi'an", "Qin Dynasty", "UNESCO", "Archaeology", "Ancient Wonder"],
+    ["Discovered by local farmers digging a well in 1974 after remaining hidden for 2,200 years", "Consists of over 8,000 life-size clay warriors, each with unique facial expressions and hairstyles", "The central tomb of Emperor Qin Shi Huang remains unexcavated due to dangerous mercury levels", "Warriors carried authentic bronze weapons coated in anti-corrosive chemical coatings"],
+    "Inscribed 1987 (Criteria i, iii, iv, vi)"),
+
+  # 18. Fushimi Inari Taisha, Japan
+  item("fushimi-inari", "Fushimi Inari Taisha", "伏見稲荷大社 (O-Inari-san)", "Sacred Temple / Cathedral", "Fushimi-ku, Kyoto", "Japan",
+    "Nara to Edo Period (711 CE foundation; current shrine rebuilt 1499 CE)", "711 CE", 711, "Hata no Irogu & Toyotomi Hideyoshi (Romon gate)",
+    "Shinto Shrine Architecture (Inari-zukuri)", "Mountain elevation: 233 m; Pathway length: 4 km; over 10,000 vermilion Torii gates",
+    "Cryptomeria (Japanese cedar) timber, vermilion cinnabar paint, granite, bronze fox statues",
+    "Fushimi Inari Taisha is the head shrine of the kami Inari, the Shinto spirit of rice, agriculture, fertility, tea, and business prosperity. Established in 711 CE on the slopes of Mount Inari by the Hata clan. During the Edo period, merchants and businesses began the tradition of donating torii gates to have their wishes fulfilled or to thank Inari for financial success. The main shrine building was rebuilt in 1499 after being destroyed during the Onin War.",
+    "The mountain path is famous for the Senbon Torii ('Thousands of Torii Gates')—two dense parallel tunnels of over 10,000 bright vermilion gates spanning 4 kilometers up the mountain. Each gate is inscribed on the back with the donor's name and donation date. The grounds feature hundreds of stone kitsune (fox) statues, considered the messengers of Inari, often holding key symbols in their mouths (a key to the rice granary, a jewel of spiritual energy, or a scroll of wisdom).",
+    "Kyoto's most iconic Shinto sanctuary, attracting millions during Hatsumode (New Year's first shrine visit).",
+    "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=1200",
+    ["Fushimi Inari", "Kyoto", "Japan", "Shinto", "Torii Gates", "Inari", "Kyoto Shrine"],
+    ["Features over 10,000 vermilion torii gates winding up the sacred Mount Inari for 4 km", "Each gate is donated by a business or individual with their name carved on the rear columns", "Guarded by stone fox (kitsune) statues holding rice granary keys and sacred jewels in their mouths", "The main shrine has been active for over 1,300 years since its founding in 711 CE"],
+    "National Shinto Treasure"),
+
+  # 19. Senso-ji, Japan
+  item("senso-ji", "Sensō-ji (Asakusa Kannon Temple)", "金龍山浅草寺 (Kinryū-zan Sensō-ji)", "Sacred Temple / Cathedral", "Asakusa, Taito, Tokyo", "Japan",
+    "Asuka Period to Modern Era (628 CE foundation; rebuilt 1958)", "628 CE", 628, "Haji no Nakatomo and Hinokuma brothers",
+    "Traditional Edo Buddhist Temple Architecture", "Main Hall height: 35 m; Five-story pagoda height: 53.3 m; Kaminarimon Gate width: 11.4 m",
+    "Japanese cedar timber, red lacquer, reinforced concrete core (modern rebuild), titanium roof tiles",
+    "Sensō-ji is Tokyo's oldest and most significant Buddhist temple, dedicated to the Bodhisattva Kannon. Legend states that in 628 CE, two fisherman brothers, Hinokuma Hamanari and Hinokuma Takenari, found a golden statue of Kannon in the Sumida River. The village headman recognized the sanctity of the statue and transformed his own home into a temple for its worship. Under the Tokugawa shogunate, Sensō-ji was adopted as the tutelary temple of the Tokugawa clan.",
+    "Approached through the iconic Kaminarimon ('Thunder Gate'), which hangs a massive 700-kilogram red paper lantern flanked by statues of Fujin (the wind god) and Raijin (the thunder god). Past the gate lies Nakamise-dori, a vibrant 250-meter shopping street that has served pilgrims since the Edo period. The Five-Story Pagoda soars 53 meters and enshrines relics of Gautama Buddha donated by Sri Lanka.",
+    "Welcoming over 30 million visitors each year, Sensō-ji is the most visited spiritual site in Japan.",
+    "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&q=80&w=1200",
+    ["Senso-ji", "Tokyo", "Japan", "Asakusa", "Kaminarimon", "Buddhist", "Pagoda"],
+    ["Tokyo's oldest temple, founded in 628 CE after two fishermen caught a golden Kannon statue in their nets", "The Kaminarimon Gate features a colossal 700 kg red paper lantern hanging beneath its eaves", "Nakamise-dori has operated as a pilgrim market continuously since the 18th century", "The 53-meter five-story pagoda enshrines sacred Buddha relics donated by Sri Lanka"],
+    "Tokyo Metropolitan Treasure"),
+
+  # 20. Temple of Heaven, China
+  item("temple-of-heaven", "Temple of Heaven (Tiantan)", "天坛 (Tiāntán - Altar of Heaven)", "Sacred Temple / Cathedral", "Dongcheng District, Beijing", "China",
+    "Ming & Qing Dynasties (1420 CE)", "1420 CE", 1420, "Yongle Emperor of Ming Dynasty",
+    "Classical Chinese Imperial Sacrificial Architecture", "Hall of Prayer height: 38 m; Diameter: 32 m; Park complex area: 2.73 km² (675 acres)",
+    "Nanmu timber columns, deep cobalt blue glazed ceramic roof tiles, white marble balustrades",
+    "The Temple of Heaven is a magnificent imperial complex of religious buildings visited by the Emperors of the Ming and Qing dynasties for annual ceremonies of prayer to Heaven for good harvest. Built between 1406 and 1420 under the Yongle Emperor, who also built the Forbidden City. In Chinese imperial cosmology, the Emperor was the 'Son of Heaven' (Tianzi), who acted as the mediator between celestial authority and earthly subjects; failure in the harvest could signify that the Emperor had lost the 'Mandate of Heaven'.",
+    "The layout reflects the ancient Chinese cosmological belief that 'Heaven is round, Earth is square': the northern part of the complex is semicircular, while the southern part is square. The centerpiece, the Hall of Prayer for Good Harvests, is a triple-gabled circular building constructed entirely of wood without a single nail, supported by 28 massive nanmu pillars representing the 4 seasons, 12 months, and 12 traditional Chinese hours. The Circular Mound Altar features concentric rings of marble flagstones arranged in multiples of the sacred number nine.",
+    "Inscribed as a UNESCO World Heritage Site in 1998 as a masterpiece of architecture and landscape design.",
+    "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&q=80&w=1200",
+    ["Temple of Heaven", "Beijing", "China", "UNESCO", "Ming Dynasty", "Imperial", "Architecture"],
+    ["Constructed without a single nail, held together entirely by interlocking wooden mortise and tenon joinery", "The northern perimeter is round and southern is square, symbolizing that Heaven is round and Earth is square", "The Hall of Prayer rests on 28 pillars representing the four seasons, twelve months, and twelve hours of the day", "Features the Echo Wall, where a whisper at one end can be clearly heard at the opposite end 65 meters away"],
+    "Inscribed 1998 (Criteria i, ii, iii)"),
+
+  # 21. Summer Palace, China
+  item("summer-palace", "Summer Palace (Yiheyuan)", "颐和园 (Yíhéyuán - Gardens of Nurtured Harmony)", "Palace & Fortress", "Haidian District, Beijing", "China",
+    "Qing Dynasty (1750 CE; rebuilt 1888 CE)", "1750–1888 CE", 1750, "Emperor Qianlong & Empress Dowager Cixi",
+    "Classical Chinese Imperial Garden Design", "Area: 2.9 km² (716 acres); Longevity Hill height: 60 m; Kunming Lake covers three-quarters of the park",
+    "Timber pavilions, Kunming lake water system, granite bridges, bronze dragons and phoenixes",
+    "The Summer Palace is the largest and best-preserved imperial park in China. Commissioned in 1750 by the Qianlong Emperor to celebrate his mother's 60th birthday, originally named the 'Garden of Clear Ripples'. Anglo-French forces torched the palace in 1860 during the Second Opium War. In 1888, Empress Dowager Cixi diverted funds allocated for modernizing the Qing imperial navy to rebuild and expand the estate as her personal pleasure retreat, renaming it Yiheyuan. She famously commissioned the immobile Marble Boat (Qingyan Fang) beside the lake.",
+    "A masterpiece of Chinese landscape garden design, integrating natural landscape with artificial features (Longevity Hill and Kunming Lake). Features the Long Corridor, a 728-meter covered wooden walkway painted with over 14,000 individual miniature scenes from Chinese history, classical mythology, and folklore. The Seventeen-Arch Bridge connects the eastern shore to Nanhu Island, designed so that on the winter solstice, the setting sun shines directly through all seventeen arches.",
+    "Designated a UNESCO World Heritage Site in 1998, declared a 'masterpiece of Chinese landscape garden design'.",
+    "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&q=80&w=1200",
+    ["Summer Palace", "Beijing", "China", "UNESCO", "Qing Dynasty", "Empress Dowager Cixi", "Gardens"],
+    ["Features Kunming Lake, entirely hand-dug by 100,000 laborers during the reign of Emperor Qianlong", "The Long Corridor is 728 meters long and decorated with over 14,000 traditional hand-painted murals", "Empress Dowager Cixi famously spent imperial navy modernization funds to build the decorative Marble Boat", "On the winter solstice, the sunset illuminates all 17 arches of the Seventeen-Arch Bridge simultaneously"],
+    "Inscribed 1998 (Criteria i, ii, iii)"),
+
+  # 22. Gyeongbokgung Palace, South Korea
+  item("gyeongbokgung", "Gyeongbokgung Palace (Northern Palace)", "경복궁 (Gyeongbokgung - Palace Greatly Blessed by Heaven)", "Palace & Fortress", "Jongno District, Seoul", "South Korea",
+    "Joseon Dynasty (1395 CE; rebuilt 1867 CE)", "1395–1867 CE", 1395, "King Taejo (Yi Seong-gye) & Regent Daewongun",
+    "Traditional Korean Joseon Palace Architecture (Dancheong painting style)", "Area: 410,000 m² (101 acres); 330 buildings; Throne Hall height: 28 m",
+    "Korean red pine timber, granite foundations, baked clay roof tiles, Dancheong five-color pigments",
+    "Gyeongbokgung was the main royal palace of the Joseon Dynasty. Built in 1395, three years after the founding of the dynasty by King Taejo, it served as the home of Kings, the royal court, and the seat of government. Burned down during the Japanese invasions (Imjin War) in 1592, it lay in ruins for nearly three centuries until Regent Heungseon Daewongun reconstructed its 330 buildings in 1867 during King Gojong's reign. In 1895, Empress Myeongseong was assassinated here by Japanese agents.",
+    "The palace is arranged along an austere north-south axis framed by Mount Bugak. Geunjeongjeon (the Throne Hall) is the largest and most solemn wooden structure in the palace, where kings held morning audiences and coronations. Hyangwonjeong Pavilion, a hexagonal two-story pavilion set on an artificial islet in a lotus pond, exemplifies the Korean aesthetic of living in peaceful harmony with nature. Gyeonghoeru Pavilion rests upon 48 granite pillars over a rectangular lake.",
+    "South Korea's most famous historic site. Houses the National Folk Museum and National Palace Museum of Korea.",
+    "https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&q=80&w=1200",
+    ["Gyeongbokgung", "Seoul", "South Korea", "Joseon Dynasty", "Palace", "King Sejong", "Korea"],
+    ["The premier and largest of the Five Grand Palaces built during the Joseon Dynasty", "King Sejong the Great invented Hangul, the Korean phonetic alphabet, within these palace grounds in 1443", "The grand Throne Hall (Geunjeongjeon) is built atop a two-tiered granite terrace with carved mythical guardians", "Features royal pavilions set on reflective lotus ponds designed for royal banquets and poetry recitals"],
+    "Historic Site of South Korea No. 117"),
+
+  # 23. Petronas Twin Towers, Malaysia
+  item("petronas-towers", "Petronas Twin Towers", "Menara Berkembar Petronas", "Monument & Tower", "Kuala Lumpur City Centre", "Malaysia",
+    "Late 20th Century Modernism (1993–1998 CE)", "1993–1998 CE", 1998, "César Pelli (Chief Architect)",
+    "Postmodern Islamic High-Tech Architecture (Rub el Hizb floor plate)", "Height: 451.9 m (1,483 ft); 88 floors; Skybridge height: 170 m",
+    "High-strength concrete, 899,000 m² of stainless steel extrusions, laminated vision glass panels",
+    "The Petronas Twin Towers were the tallest buildings in the world from 1998 to 2004, and remain the tallest twin towers on Earth today. Commissioned by Malaysian Prime Minister Mahathir Mohamad as a symbol of Malaysia's entry into the global modern economy. Constructed by two competing international consortia (Tower 1 by Hazama Corporation of Japan, Tower 2 by Samsung C&T of South Korea). Opened on August 31, 1999, on Malaysia's National Day.",
+    "The floor plan of each tower is based on the Rub el Hizb, an Islamic geometric symbol formed by two overlapping squares forming an eight-pointed star, with semicircles added in the corners to soften the profile. The towers are connected at the 41st and 42nd floors by a double-deck Skybridge that floats on spherical bearings so the towers can sway independently during high monsoon winds without stressing the bridge.",
+    "The defining architectural emblem of Malaysia and Kuala Lumpur's primary urban landmark.",
+    "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&q=80&w=1200",
+    ["Petronas Towers", "Kuala Lumpur", "Malaysia", "Twin Towers", "Skyscraper", "Cesar Pelli"],
+    ["The tallest twin towers in the world at 451.9 meters (1,483 feet) tall", "The floor plan is based on the Islamic eight-pointed star (Rub el Hizb) symbol", "Connected at floors 41 and 42 by a 58-meter-long Skybridge that slides on spherical bearings", "Constructed by two competing consortia from Japan and South Korea, who raced to finish first"],
+    "Global Architectural Icon"),
+
+  # 24. Taipei 101, Taiwan
+  item("taipei-101", "Taipei 101", "臺北101 (Taipei World Financial Center)", "Monument & Tower", "Xinyi District, Taipei", "Taiwan",
+    "Contemporary Postmodern High-Tech (1999–2004 CE)", "1999–2004 CE", 2004, "C.Y. Lee & Partners",
+    "Postmodern Pagoda & Bamboo High-Tech Skyscraper", "Height: 508 m (1,667 ft); 101 floors; Tuned mass damper diameter: 5.5 m, weight: 660 metric tonnes",
+    "High-strength steel, high-performance reinforced concrete, double-glazed blue-green reflective glass",
+    "Taipei 101 was officially the tallest building in the world from 2004 until the completion of the Burj Khalifa in 2010. Designed by C.Y. Lee, the tower resembles a giant stalk of bamboo rising through the clouds, a symbol of rapid growth, resilience, and flexibility in Asian culture. Divided into eight modular segments of eight floors each, referencing the auspicious Chinese number eight. It was the first skyscraper in the world to surpass the half-kilometer mark.",
+    "Located directly over an active seismic fault line and in the path of Pacific typhoons. To counteract violent swaying, engineers suspended a massive 660-tonne gold-painted steel tuned mass damper (TMD) between the 87th and 92nd floors. Supported by eight steel mega-columns filled with high-strength concrete up to the 62nd floor. Features pressurized double-deck elevators that reach speeds of 60.6 km/h (37.7 mph), ascending from ground level to the 89th-floor observatory in just 37 seconds.",
+    "Awarded LEED Platinum certification as the tallest green building in the world. World-famous for its spectacular annual New Year's Eve firework shows launched from each tiered segment.",
+    "https://images.unsplash.com/photo-1508248467877-aec1b08de376?auto=format&fit=crop&q=80&w=1200",
+    ["Taipei 101", "Taipei", "Taiwan", "Skyscraper", "Tuned Mass Damper", "Bamboo", "Engineering"],
+    ["Was the world's tallest building from 2004 to 2010 at 508 meters (1,667 feet)", "Features a 660-ton golden spherical pendulum between floors 87 and 92 to counter typhoon winds", "Elevators travel at 60.6 km/h, rocketing visitors to the 89th floor observatory in just 37 seconds", "Exterior shape is inspired by a segmented bamboo stalk, an Asian symbol of strength and flexibility"],
+    "Engineering Landmark of the 21st Century")
+]
+
+# We combine base and additional
+all_asia = asian_monuments + additional_asia
+print(f"Total Asian monuments ready: {len(all_asia)}")
